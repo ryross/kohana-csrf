@@ -8,12 +8,12 @@ class CSRF {
 	 * @param   string  $namespace - semi-unique name for the token (support for multiple forms)
 	 * @return  string
 	 */
-	public static function token()
+	public static function token($new = FALSE)
 	{
 		$token = Session::instance()->get('csrf-token');
 
 		// Generate a new token if no token is found
-		if ( ! $token)
+		if ($new === TRUE OR ! $token)
 		{
 			$token = Text::random('alnum', rand(20, 30));
 			Session::instance()->set('csrf-token', $token);
